@@ -48,6 +48,8 @@ Your code should not be executed when imported (by using if __name__ == "__main_
 ## More Info
 ### Install MongoDB 4.2 in Ubuntu 18.04
 [Official installation guide](https://intranet.alxswe.com/rltoken/8p4x14Ddn1UxKXZ5nPt3zA)
+
+
 ``` shell
 $ wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
 $ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.2.list
@@ -81,8 +83,12 @@ $ sudo mkdir -p /data/db
 ```
 Or if /etc/init.d/mongod is missing, please find here an example of the file:
 
-``` shell
+<details open>
+<summary> Click to expand/hide file contents </summary>
 
+<br>
+
+``` shell
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          mongod
@@ -318,6 +324,8 @@ esac
 exit 0
 
 ```
+</details>
+
 ### Use “container-on-demand” to run MongoDB
 - Ask for container Ubuntu 18.04 - MongoDB
 - Connect via SSH
