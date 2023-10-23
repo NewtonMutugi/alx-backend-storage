@@ -1,28 +1,20 @@
 #!/usr/bin/env python3
-"""Writing strings to Redis"""
-from typing import Callable, Optional, Union
+"""Exercise """
 import redis
 import uuid
+from typing import Union
 
 
 class Cache:
-    """Cache class"""
+    """ Cache class"""
 
-    def __init__(self) -> None:
-        """Constructor"""
+    def __init__(self):
+        """Initializes cache"""
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: Union[str, int, float, bytes]) -> str:
-        """Store data in Redis"""
+    def store(self, data: Union[str, bytes, int, float]) -> str:
+        """store data in dataset"""
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
-
-    def get(self, key: str,
-            fn: Optional[Callable] = None) -> Union[str, int, float, bytes]:
-        """Get data from Redis"""
-        data = self._redis.get(key)
-        if fn:
-            return fn(data)
-        return data
