@@ -3,6 +3,7 @@
 import redis
 import uuid
 from typing import Union, Callable
+from functools import wraps
 
 
 class Cache:
@@ -13,6 +14,16 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    def count_calls(fn: Callable) -> Callable:
+        """Decorator function"""
+        @wraps(fn)
+        def wrapper(self, *args, **kwargs):
+            key = fn.__qualname__
+            self._redis.incr(key)
+            return fn(self, *args, **kwargs)
+        return wrapper
+
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """store data in dataset"""
         key = str(uuid.uuid4())
